@@ -1,26 +1,60 @@
 package org.example;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 import java.io.*;
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
-        MyReader r1 = new MyReader ("test1.txt");
-        MyReader r2 = new MyReader ("test2.txt");
+    public static void main(String[] args)  {
 
-        while (r1.isNext() && r2.isNext()){
-            System.out.println("("+r1.getNext() +")["+ r2.getNext()+"]");
-        }
-        while (r1.isNext() ){
-            System.out.println("("+r1.getNext() +")");
-        }
-        while (r2.isNext()){
-            System.out.println("["+ r2.getNext()+"]");
+        ArrayList<MyReader> readerList = new ArrayList<MyReader>();
+
+
+        for (int i=1; i<5; i++) {
+            try {
+                readerList.add(new MyReader ("test"+i+".txt"));
+            }  catch (IOException e) {
+                System.out.println(e.toString());
         }
 
-        r1.close();
-        r2.close();
+      }
 
+        while (readerList.size()>0) {
+            Iterator<MyReader> it = readerList.iterator();//создаем итератор
+            while(it.hasNext()) {//до тех пор, пока в списке есть элементы
+                MyReader nextReader = it.next();//получаем следующий элемент
+                try {
+//                    ArrayList<String> strings = new ArrayList<String>();
+//                    strings.add(nextReader.getNext());
+
+                    System.out.println("("+nextReader.getNext()+")");
+                } catch (EOFException e) {
+                    nextReader.close();
+                    it.remove();
+                }
+            }
+        }
+//        while (r1.isNext() && r2.isNext()) {
+//
+//            if () {
+//
+//            }
+//        }
+//        while (r1.isNext() && r2.isNext()){
+//            System.out.println("("+r1.getNext() +")["+ r2.getNext()+"]");
+//        }
+//        while (r1.isNext() ){
+//            System.out.println("("+r1.getNext() +")");
+//        }
+//        while (r2.isNext()){
+//            System.out.println("["+ r2.getNext()+"]");
+//        }
+//
+//
+//    for (MyReader ptr : readerList) {
+//        ptr.close();
+//    }
 
 
 
