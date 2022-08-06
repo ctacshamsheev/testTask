@@ -7,44 +7,44 @@ import java.util.Scanner;
 
 public class MyReader {
     private Scanner sc = null;
-//    private String filename = null;
-//    private String previous = null;
+    private String filename = null;
+    private String previous = null;
+    private String current = null;
 
 
-    MyReader(String filename) throws FileNotFoundException {
-      //  this.filename = filename;
-        this.sc =  new Scanner(new File(filename));
-
+    MyReader(String filename) throws FileNotFoundException, EOFException {
+        this.filename = filename;
+        this.sc = new Scanner(new File(filename));
+        setNext();
+    }
+    public String getCurrent() {
+        return current;
     }
 
-    public String getNext() throws EOFException {
-        if (!isNext()) {
+    public void setNext() throws EOFException {
+        if (!sc.hasNext()) {
+            sc.close();
             throw new EOFException();
         }
-        return sc.next();
-//        String result = sc.next();
-//        if (previous != null && result!= null ) {
-//            if ( result.compareTo(previous) >= 0) { // TODO comparator
-//
-//                previous = result;
-//                return result;
-//            } else {  // TODO exception
-//                System.out.println("not sorted");
-//                previous = result;
-//                return result;
-//            }
-//        } else {
-//            previous = result;
-//            return result;
-//        }
+        previous = current;
+        current = sc.next();
+        if (previous != null && isMore() ) {
+            // TODO comparator
+            // TODO exception
+//            throw new EOFException();
+            System.out.println("not sorted");
+        }
+//        return current;
     }
 
-    public boolean isNext(){
-        return sc.hasNext();
+    public boolean  isMore() {
+       return current.compareTo(previous) < 0;
     }
 
-    public void close() {
-        sc.close();
+    @Override
+    public String toString() {
+        return "{" +
+                this.filename +
+                '}' + current;
     }
-
 }
