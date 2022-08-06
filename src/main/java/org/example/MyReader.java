@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class MyReader {
+public class MyReader implements IReadable  {
     private Scanner sc = null;
     private String filename = null;
     private String previous = null;
@@ -13,9 +13,13 @@ public class MyReader {
 
 
     MyReader(String filename) throws FileNotFoundException, EOFException {
+
         this.filename = filename;
         this.sc = new Scanner(new File(filename));
         setNext();
+//        System.out.println( "[" +
+//                filename +
+//                ']');
     }
     public String getCurrent() {
         return current;
@@ -27,6 +31,8 @@ public class MyReader {
             throw new EOFException();
         }
         previous = current;
+   //     System.out.println("setNext : " + this);
+
         current = sc.next();
         if (previous != null && isMore() ) {
             // TODO comparator
@@ -41,10 +47,15 @@ public class MyReader {
        return current.compareTo(previous) < 0;
     }
 
+    public boolean  isMore(MyReader other) {
+        return current.compareTo(other.getCurrent()) < 0;
+    }
+
+
     @Override
     public String toString() {
-        return "{" +
+        return "[" +
                 this.filename +
-                '}' + current;
+                ']' + current;
     }
 }

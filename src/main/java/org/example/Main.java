@@ -10,8 +10,8 @@ import java.io.*;
 
 public class Main {
 
-    public static ArrayList<MyReader> getReaderList(ArrayList<String> filenames) {
-        ArrayList<MyReader> readersList = new ArrayList<MyReader>();
+    public static ArrayList<IReadable> getReaderList(ArrayList<String> filenames) {
+        ArrayList<IReadable> readersList = new ArrayList<IReadable>();
         for (String filename : filenames) {
             try {
                 readersList.add(new MyReader(filename));
@@ -25,36 +25,47 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<String> filenames = new ArrayList<>();
 
-        for (int i = 1; i < 5; i++) { // TODO args list
+        for (int i = 1; i < 7; i++) { // TODO args list
             filenames.add("test" + i + ".txt");
         }
 
-        ArrayList<MyReader> readersList = getReaderList(filenames);
+        ArrayList<IReadable> readersList = getReaderList(filenames);
 
         while (readersList.size() > 0) {
-            Iterator<MyReader> readerIterator = readersList.iterator();
-            ArrayList<String> strings = new ArrayList<String>();
+            // Iterator<IReadable> readerIterator = readersList.iterator();
 
-            while (readerIterator.hasNext()) {
-                MyReader reader = readerIterator.next();
+
+            ArrayList<String> strings = new ArrayList<String>();
+            //String minValue = readersList[0];
+            for (IReadable reader : readersList) {
                 strings.add(reader.getCurrent());
-//                System.out.println("(" + reader.getCurrent() + ")");
             }
+
+//            while (readerIterator.hasNext()) {
+//                IReadable reader = readerIterator.next();
+//                strings.add(reader.getCurrent());
+////                System.out.println("(" + reader.getCurrent() + ")");
+//            }
             // getmin
             String minValue = Collections.min(strings, String.CASE_INSENSITIVE_ORDER);
-            System.out.println("min = " + minValue);
+            System.out.println("min = " + minValue + " from " + strings);
 
 
             // min next
-            readerIterator = readersList.iterator();
+
+            Iterator<IReadable> readerIterator = readersList.iterator();
             while (readerIterator.hasNext()) {
-                MyReader reader = readerIterator.next();
-                if (reader.getCurrent().equals(minValue))
+
+                IReadable reader = readerIterator.next();
+
+                if (minValue.compareTo(reader.getCurrent()) == 0) {
+                  //  System.out.println(reader);
                     try {
                         reader.setNext();
                     } catch (EOFException e) {
                         readerIterator.remove();
                     }
+                }
             }
 
 
@@ -83,7 +94,7 @@ public class Main {
 //        }
 //
 //
-//    for (MyReader ptr : readersList) {
+//    for (IReadable ptr : readersList) {
 //        ptr.close();
 //    }
 
