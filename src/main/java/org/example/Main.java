@@ -5,68 +5,15 @@ import java.util.*;
 import java.io.*;
 
 //  mvn package
-// java -jar target/testTask-1.0-SNAPSHOT.jar
-//java -jar target/testTask-1.0-SNAPSHOT.jar test
+// java -jar target/testTask-1.0-SNAPSHOT.jar -i -d out.txt in1.txt in2.txt
+
 public class Main {
-
-    public static ArrayList<IReadable> getReaderList(ArrayList<String> filenames) {
-        ArrayList<IReadable> readersList = new ArrayList<IReadable>();
-        for (String filename : filenames) {
-            try {
-                readersList.add(new MyReaderInt(filename));
-            } catch (IOException e) {
-                System.out.println(e.toString());
-            }
-        }
-        return readersList;
-    }
-
     public static void main(String[] args) {
         //System.out.println( new Parser(args));
-        System.out.println(new Parser(new String[]{"-i","-d", "out.txt", "in.txt"}));
-
-        ArrayList<String> filenames = new ArrayList<>();
-
-        for (int i = 1; i < 7; i++) { // TODO args list
-            filenames.add("test" + i + ".txt");
+        try {
+            new MergeSort(new String[]{"-i", "-d", "out.txt", "test1.txt", "test4.txt"});
+        } catch (IllegalArgumentException | IOException e) {
+            System.out.println(e.getMessage());
         }
-
-        ArrayList<IReadable> readersList = getReaderList(filenames);
-
-        while (readersList.size() > 0) {
-            ArrayList<String> strings = new ArrayList<String>();
-            for (IReadable reader : readersList) {
-                strings.add(reader.getCurrent());
-            }
-//            // TODO getmin
-//            String minValue = Collections.min(strings, String.CASE_INSENSITIVE_ORDER);
-//            System.out.println("min = " + minValue + " from " + strings);
-
-            int minIndex = 0;
-            for (int i = 1; i < readersList.size(); i++) {
-                if (readersList.get(minIndex).isMore(readersList.get(i))) {
-                    minIndex = i;
-                }
-            }
-
-            System.out.println("min = " + readersList.get(minIndex).getCurrent() + " from " + readersList.get(minIndex));
-            // min next
-            try {
-                readersList.get(minIndex).setNext();
-            } catch (EOFException e) {
-                readersList.remove(minIndex);
-            } catch (NoSuchElementException e) {
-                readersList.remove(minIndex);
-            }
-        }
-        //        FileWriter writer = null;
-//        try {
-//            writer = new FileWriter("test1.txt");
-//            writer.write(Integer.toString(5));
-//            writer.close();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-
     }
 }
