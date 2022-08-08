@@ -39,4 +39,4 @@
 
 например
 
-`java -jar target/testTask-1.0-SNAPSHOT.jar -d -s out.txt in1.txt in2.txt (для строк по убыванию)`
+`java -jar target/testTask-1.0-SNAPSHOT.jar -d -s out.txt in1.txt in2.txt` (для строк по убыванию)
