@@ -5,16 +5,18 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class MyReader implements IReadable  {
+public class MyReader implements IReadable {
+    private boolean isIncreaseOrDecrease;
     private Scanner sc = null;
     private String filename = null;
     private String previous = null;
     private String current = null;
 
 
-    MyReader(String filename) throws FileNotFoundException, EOFException {
+    MyReader(String filename, boolean isIncreaseOrDecrease) throws FileNotFoundException, EOFException {
         this.filename = filename;
         this.sc = new Scanner(new File(filename));
+        this.isIncreaseOrDecrease = isIncreaseOrDecrease;
         setNext();
     }
 
@@ -28,26 +30,17 @@ public class MyReader implements IReadable  {
             throw new EOFException();
         }
         previous = current;
-   //     System.out.println("setNext : " + this);
-
         current = sc.next();
-        while (previous != null && isSorted() ) {
-
-            // TODO comparator
-            // TODO exception
-//            throw new EOFException();
-            System.out.println("not sorted: " + current + "> skip");
+        while (previous != null && isSorted(current, previous)) {
+            System.out.println("Not sorted: " + filename + " skip: " + current);
             current = sc.next();
         }
-//        return current;
     }
 
-    public boolean isSorted() {
-       return current.compareTo(previous) < 0;
-    }
 
-    public boolean  isMore(IReadable other) {
-        return current.compareTo(other.getCurrent()) > 0;
+
+    public boolean isSearch(IReadable other) {
+        return   isSorted(other.getCurrent(), current);
     }
 
 
@@ -56,5 +49,9 @@ public class MyReader implements IReadable  {
         return "[" +
                 this.filename +
                 ']' + current;
+    }
+
+    private boolean isSorted(String first, String second) {
+        return (isIncreaseOrDecrease) ? first.compareTo(second) < 0 : first.compareTo(second) > 0;
     }
 }

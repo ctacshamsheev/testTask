@@ -5,59 +5,65 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class MyReaderInt implements IReadable {
-
+    private boolean isIncreaseOrDecrease;
     private Scanner sc = null;
     private String filename = null;
     private Integer previous = null;
     private Integer current = null;
 
-    MyReaderInt(String filename) throws FileNotFoundException, EOFException {
+    MyReaderInt(String filename, boolean isIncreaseOrDecrease) throws FileNotFoundException, EOFException {
         this.filename = filename;
         this.sc = new Scanner(new File(filename));
+        this.isIncreaseOrDecrease = isIncreaseOrDecrease;
         setNext();
     }
 
-    @Override
-    public void setNext() throws EOFException , NoSuchElementException {
-        if (!sc.hasNext()) {
-            sc.close();
+    private int getNext() throws EOFException {
+        if (sc.hasNext()) {
+            try {
+                return sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Error input: " + filename + " " + sc.nextLine());
+                //throw new EOFException("Error input: " + filename + " " + sc.nextLine());
+                return getNext();
+            }
+        } else {
             throw new EOFException();
         }
+    }
+
+    @Override
+    public void setNext() throws EOFException, NoSuchElementException {
         previous = current;
-        //     System.out.println("setNext : " + this);
-
-        current = sc.nextInt();
-        while (previous != null && isSorted() ) {
-            // TODO comparator
-            // TODO exception
-//            throw new EOFException();
-            System.out.println("not sorted: " + current + "> skip");
-            current = sc.nextInt();
+        current = getNext();
+        while (previous != null && isSorted(current, previous)) {
+            System.out.println("Not sorted: " + filename + " skip: " + current);
+            current = getNext();
         }
-//        return current;
     }
 
-    @Override
-    public boolean isSorted() {
-        return  current < previous;
-    }
 
     @Override
-    public boolean isMore(IReadable other) {
-
-        return current > Integer.parseInt(other.getCurrent());
+    public boolean isSearch(IReadable other) {
+        return isSorted( Integer.parseInt(other.getCurrent()), current);
     }
 
     @Override
     public String getCurrent() {
-        return  ""+ current;
+        return "" + current;
         //return Integer.toString(current);
     }
+
     public String toString() {
         return "[" +
                 this.filename +
                 ']' + current;
+    }
+
+    private boolean isSorted(int first, int second) {
+        return (isIncreaseOrDecrease) ? first < second : first > second;
     }
 }
