@@ -8,33 +8,52 @@ public class Parser {
     private boolean isIntOrString = false; // int - true; string - false;
     private boolean isIncreaseOrDecrease = true; // Increase - true; Decrease - false;
 
-    Parser(String[] args) {
+    Parser(String[] args) throws IllegalArgumentException {
         inputFileNames = new ArrayList<>();
+        boolean errNotOutput = true;
+        boolean errNotInput = true;
+        int errNotFlagsType = 0;
+        int errNotFlagsSort = 0;
+
         for (String arg : args) {
             if (arg.charAt(0) == '-') {
                 switch (arg) {
                     case "-i":
                         isIntOrString = true;
+                        errNotFlagsType++;
                         break;
                     case "-s":
                         isIntOrString = false;
+                        errNotFlagsType++;
                         break;
                     case "-a":
                         isIncreaseOrDecrease = true;
+                        errNotFlagsSort++;
                         break;
                     case "-d":
-                        isIncreaseOrDecrease = true;
+                        isIncreaseOrDecrease = false;
+                        errNotFlagsSort++;
                         break;
                     default:
-                        System.out.println("Oooops, something wrong !");
+                        throw new IllegalArgumentException("Unknown argument: " + arg);
                 }
             } else {
                 if (outputFileName == null) {
                     outputFileName = arg;
+                    errNotOutput = false;
                 } else {
                     inputFileNames.add(arg);
+                    errNotInput = false;
                 }
             }
+        }
+        if (errNotOutput || errNotInput || errNotFlagsType != 1 || errNotFlagsSort > 1) {
+            String err = "Error argument: (" + args + ")";
+            if (errNotOutput) err += " No output file!";
+            if (errNotInput) err += " No input file!";
+            if (errNotFlagsType != 1) err += " Use one type flag -i or -s!";
+            if (errNotFlagsSort > 1) err += " Use only one flag -a or -d! ";
+            throw new IllegalArgumentException(err);
         }
     }
 
