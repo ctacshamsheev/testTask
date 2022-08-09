@@ -40,7 +40,7 @@ public class MyReaderInt implements IReadable {
         previous = current;
         current = getNext();
         while (previous != null && isSorted(current, previous)) {
-            System.out.println("Not sorted: " + filename + " skip: " + current);
+            System.out.println("Error input: " + filename +  " Not sorted file, skip:\t" + current + "\t(previous: " + previous + ")");
             current = getNext();
         }
     }
@@ -48,7 +48,7 @@ public class MyReaderInt implements IReadable {
 
     @Override
     public boolean isSearch(IReadable other) {
-        return isSorted( Integer.parseInt(other.getCurrent()), current);
+        return isSorted(Integer.parseInt(other.getCurrent()), current);
     }
 
     @Override

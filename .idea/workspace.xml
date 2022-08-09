@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15bc99ae-d03f-4d4f-a7f1-11df01a8e63f" name="Changes" comment="add merge sort class">
+    <list default="true" id="15bc99ae-d03f-4d4f-a7f1-11df01a8e63f" name="Changes" comment="add int exeption, all flags">
       <change afterPath="$PROJECT_DIR$/out.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/IReadable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/IReadable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MergeSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MergeSort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MyReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MyReader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MyReaderInt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MyReaderInt.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test1.txt" afterDir="false" />
@@ -47,19 +46,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -71,7 +70,8 @@
       <workItem from="1659765687123" duration="14982000" />
       <workItem from="1659852138090" duration="7288000" />
       <workItem from="1659883596881" duration="5377000" />
-      <workItem from="1659943049392" duration="9586000" />
+      <workItem from="1659943049392" duration="9948000" />
+      <workItem from="1660043285610" duration="3594000" />
     </task>
     <task id="LOCAL-00001" summary="test commit">
       <created>1659765997586</created>
@@ -136,7 +136,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659955412466</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="add int exeption, all flags">
+      <created>1659962627801</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1659962627801</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -163,7 +170,8 @@
     <MESSAGE value="mvn???" />
     <MESSAGE value="add parser error" />
     <MESSAGE value="add merge sort class" />
-    <option name="LAST_COMMIT_MESSAGE" value="add merge sort class" />
+    <MESSAGE value="add int exeption, all flags" />
+    <option name="LAST_COMMIT_MESSAGE" value="add int exeption, all flags" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/testTask$Main.ic" NAME="Main Coverage Results" MODIFIED="1659863236162" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
