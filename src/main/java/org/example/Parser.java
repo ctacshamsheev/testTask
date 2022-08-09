@@ -41,7 +41,9 @@ public class Parser {
                 if (outputFileName == null) { // first - output file
                     outputFileName = arg;
                     errNotOutput = false;
-                } else { // others - input files
+                } else if (arg.equals(outputFileName)) { // others - input files
+                    throw new IllegalArgumentException("input and output files must be different: " + arg);
+                } else {
                     inputFileNames.add(arg);
                     errNotInput = false;
                 }
