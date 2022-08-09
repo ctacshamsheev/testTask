@@ -8,8 +8,8 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         try {
-           // new MergeSort(args);
-            new MergeSort(new String[]{"-i", "-d", "out.txt", "test1.txt"});
+           new MergeSort(args);
+           // new MergeSort(new String[]{"-s", "-a", "out.txt", "test1.txt", "test2.txt","test5.txt", "test4.txt"});
         } catch (IllegalArgumentException | IOException e) {
             System.out.println(e.getMessage());
         }
