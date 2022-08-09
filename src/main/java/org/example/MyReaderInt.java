@@ -44,17 +44,24 @@ public class MyReaderInt implements IReadable {
     }
 
     private int getNext() throws EOFException {
-        if (sc.hasNext()) {
-            try {
-                return sc.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Error input: " + filename + " " + sc.nextLine());
-                //throw new EOFException("Error input: " + filename + " " + sc.nextLine());
+        if (sc.hasNextLine()) {
+            String result = sc.nextLine();
+            if (result.contains(" ") || result.contains("\t")) {
+                System.out.println("Error input: " + filename + " String contains a whitespace character:" + result);
                 return getNext();
+            } else {
+                try {
+                    return Integer.parseInt(result);
+                } catch (Exception e) {
+                    System.out.println("Error input: " + filename + " " + sc.nextLine() + " " +e.getMessage());
+                    //throw new EOFException("Error input: " + filename + " " + sc.nextLine());
+                    return getNext();
+                }
             }
         } else {
             throw new EOFException("empty file or incorrect: " + filename);
         }
+
     }
 
     private boolean isSorted(int first, int second) {

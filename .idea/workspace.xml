@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="15bc99ae-d03f-4d4f-a7f1-11df01a8e63f" name="Changes" comment="add int exeption, all flags">
+    <list default="true" id="15bc99ae-d03f-4d4f-a7f1-11df01a8e63f" name="Changes" comment="add exception">
       <change afterPath="$PROJECT_DIR$/out.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/MyReaderInt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/MyReaderInt.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Parser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +65,7 @@
       <workItem from="1659852138090" duration="7288000" />
       <workItem from="1659883596881" duration="5377000" />
       <workItem from="1659943049392" duration="9948000" />
-      <workItem from="1660043285610" duration="7544000" />
+      <workItem from="1660043285610" duration="9618000" />
     </task>
     <task id="LOCAL-00001" summary="test commit">
       <created>1659765997586</created>
@@ -150,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660061674578</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="add exception">
+      <created>1660063220260</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1660063220260</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,7 +186,8 @@
     <MESSAGE value="add parser error" />
     <MESSAGE value="add merge sort class" />
     <MESSAGE value="add int exeption, all flags" />
-    <option name="LAST_COMMIT_MESSAGE" value="add int exeption, all flags" />
+    <MESSAGE value="add exception" />
+    <option name="LAST_COMMIT_MESSAGE" value="add exception" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/testTask$Main.ic" NAME="Main Coverage Results" MODIFIED="1659863236162" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
