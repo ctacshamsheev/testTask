@@ -1,19 +1,20 @@
 package org.example;
 
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.NoSuchElementException;
+import java.io.EOFException;
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 
 public class MyReaderInt implements IReadable {
-    private boolean isIncreaseOrDecrease;
+    private boolean isIncreaseOrDecrease; // sort type
     private Scanner sc = null;
     private String filename = null;
     private Integer previous = null;
     private Integer current = null;
 
+    /* class implements reading int value from file, implements validation, and checks for order */
     MyReaderInt(String filename, boolean isIncreaseOrDecrease) throws FileNotFoundException, EOFException {
         this.filename = filename;
         this.sc = new Scanner(new File(filename));
@@ -21,30 +22,15 @@ public class MyReaderInt implements IReadable {
         setNext();
     }
 
-    private int getNext() throws EOFException {
-        if (sc.hasNext()) {
-            try {
-                return sc.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Error input: " + filename + " " + sc.nextLine());
-                //throw new EOFException("Error input: " + filename + " " + sc.nextLine());
-                return getNext();
-            }
-        } else {
-            throw new EOFException();
-        }
-    }
-
     @Override
     public void setNext() throws EOFException, NoSuchElementException {
         previous = current;
         current = getNext();
         while (previous != null && isSorted(current, previous)) {
-            System.out.println("Error input: " + filename +  " Not sorted file, skip:\t" + current + "\t(previous: " + previous + ")");
+            System.out.println("Error input: " + filename + " Not sorted file, skip:\t" + current + "\t(previous: " + previous + ")");
             current = getNext();
         }
     }
-
 
     @Override
     public boolean isSearch(IReadable other) {
@@ -57,10 +43,18 @@ public class MyReaderInt implements IReadable {
         //return Integer.toString(current);
     }
 
-    public String toString() {
-        return "[" +
-                this.filename +
-                ']' + current;
+    private int getNext() throws EOFException {
+        if (sc.hasNext()) {
+            try {
+                return sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Error input: " + filename + " " + sc.nextLine());
+                //throw new EOFException("Error input: " + filename + " " + sc.nextLine());
+                return getNext();
+            }
+        } else {
+            throw new EOFException("empty file or incorrect: " + filename);
+        }
     }
 
     private boolean isSorted(int first, int second) {

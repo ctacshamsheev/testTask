@@ -3,18 +3,15 @@ package org.example;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+/* class implements reading text strings from file, implements validation, and checks for order */
 public class MyReader implements IReadable {
     private boolean isIncreaseOrDecrease;
     private Scanner sc = null;
     private String filename = null;
     private String previous = null;
     private String current = null;
-
 
     MyReader(String filename, boolean isIncreaseOrDecrease) throws FileNotFoundException, EOFException {
         this.filename = filename;
@@ -23,6 +20,23 @@ public class MyReader implements IReadable {
         setNext();
     }
 
+
+    @Override
+    public void setNext() throws EOFException {
+        previous = current;
+        current = getNext();
+        while (previous != null && isSorted(current, previous)) {
+            System.out.println("Error input: " + filename + " Not sorted file, skip:\t" + current + "\t(previous: " + previous + ")");
+            current = getNext();
+        }
+    }
+
+    @Override
+    public boolean isSearch(IReadable other) {
+        return isSorted(other.getCurrent(), current);
+    }
+
+    @Override
     public String getCurrent() {
         return current;
     }
@@ -37,30 +51,8 @@ public class MyReader implements IReadable {
                 return result;
             }
         } else {
-            throw new EOFException();
+            throw new EOFException("empty file or incorrect: " + filename);
         }
-    }
-
-    public void setNext() throws EOFException {
-        previous = current;
-        current = getNext();
-        while (previous != null && isSorted(current, previous)) {
-            System.out.println("Error input: " + filename +  " Not sorted file, skip:\t" + current + "\t(previous: " + previous + ")");
-            current = getNext();
-        }
-    }
-
-
-    public boolean isSearch(IReadable other) {
-        return isSorted(other.getCurrent(), current);
-    }
-
-
-    @Override
-    public String toString() {
-        return "[" +
-                this.filename +
-                ']' + current;
     }
 
     private boolean isSorted(String first, String second) {

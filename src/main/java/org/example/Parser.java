@@ -3,20 +3,20 @@ package org.example;
 import java.util.ArrayList;
 
 public class Parser {
-    private ArrayList<String> inputFileNames = null;
+    private ArrayList<String> inputFileNames = new ArrayList<>();
     private String outputFileName = null;
     private boolean isIntOrString = false; // int - true; string - false;
     private boolean isIncreaseOrDecrease = true; // Increase - true; Decrease - false;
 
     Parser(String[] args) throws IllegalArgumentException {
-        inputFileNames = new ArrayList<>();
         boolean errNotOutput = true;
         boolean errNotInput = true;
         int errNotFlagsType = 0;
         int errNotFlagsSort = 0;
 
+        // parsing input args
         for (String arg : args) {
-            if (arg.charAt(0) == '-') {
+            if (arg.charAt(0) == '-') { // parsing key
                 switch (arg) {
                     case "-i":
                         isIntOrString = true;
@@ -38,16 +38,16 @@ public class Parser {
                         throw new IllegalArgumentException("Unknown argument: " + arg);
                 }
             } else {
-                if (outputFileName == null) {
+                if (outputFileName == null) { // first - output file
                     outputFileName = arg;
                     errNotOutput = false;
-                } else {
+                } else { // others - input files
                     inputFileNames.add(arg);
                     errNotInput = false;
                 }
             }
         }
-        if (errNotOutput || errNotInput || errNotFlagsType != 1 || errNotFlagsSort > 1) {
+        if (errNotOutput || errNotInput || errNotFlagsType != 1 || errNotFlagsSort > 1) { // generate error
             String err = "Error argument: (" + args + ")";
             if (errNotOutput) err += " No output file!";
             if (errNotInput) err += " No input file!";
@@ -71,15 +71,5 @@ public class Parser {
 
     public boolean isIncreaseOrDecrease() {
         return isIncreaseOrDecrease;
-    }
-
-    @Override
-    public String toString() {
-        return "Parser{" +
-                "inputFileNames=" + inputFileNames +
-                ", outputFileName='" + outputFileName + '\'' +
-                ", isIntOrString=" + isIntOrString +
-                ", isIncreaseOrDecrease=" + isIncreaseOrDecrease +
-                '}';
     }
 }

@@ -7,15 +7,14 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 public class MergeSort {
+    Parser attributes = null;
 
-    MergeSort(String[] args) throws IllegalArgumentException, IOException {
-        Parser attributes = new Parser(args);
+    MergeSort(Parser attributes) throws IllegalArgumentException, IOException {
+        this.attributes = attributes;
         FileWriter writer = new FileWriter(attributes.getOutputFileName());
         ArrayList<IReadable> readersList = getReaderList(attributes.getInputFileNames(), attributes.isIntOrString(), attributes.isIncreaseOrDecrease());
-
         // sort and print
         while (readersList.size() > 0) {
-
             // search min or max
             int minIndex = 0;
             for (int i = 1; i < readersList.size(); i++) {
@@ -25,16 +24,17 @@ public class MergeSort {
             }
             // print min
             writer.write(readersList.get(minIndex).getCurrent() + "\n");
-              // min next
+            // min next
             try {
                 //install next
                 readersList.get(minIndex).setNext();
-            } catch (EOFException | NoSuchElementException  e) {
+            } catch (EOFException | NoSuchElementException e) {
                 // remove file
                 readersList.remove(minIndex);
             }
         }
         writer.close();
+        System.out.println("Sort finished. Open: " + attributes.getOutputFileName());
     }
 
     private ArrayList<IReadable> getReaderList(ArrayList<String> filenames, boolean typeFlag, boolean sortFlag) {

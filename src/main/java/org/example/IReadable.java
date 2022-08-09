@@ -2,11 +2,11 @@ package org.example;
 
 import java.io.EOFException;
 
+/* interface file reading for sorting */
 public interface IReadable {
-    public void setNext() throws EOFException;
+    void setNext() throws EOFException; // read next correct value or throw EOF file
 
-    public boolean isSearch(IReadable other);
+    boolean isSearch(IReadable other); // sort condition. find min or max value
 
-    public String getCurrent();
-
+    String getCurrent(); // current value in file
 }
