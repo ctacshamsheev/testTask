@@ -52,7 +52,7 @@ public class MyReaderInt implements IReadable {
                 try {
                     return Integer.parseInt(result);
                 } catch (NumberFormatException e) {
-                    System.out.println("Error input: " + filename + " Convert to int error:" + result);
+                    System.out.println("Error input: " + filename + " Convert to int error: " + result);
                     return getNext();
                 }
             }
