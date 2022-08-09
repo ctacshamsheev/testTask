@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.EOFException;
 import java.util.Scanner;
-import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 
 public class MyReaderInt implements IReadable {
@@ -46,15 +45,14 @@ public class MyReaderInt implements IReadable {
     private int getNext() throws EOFException {
         if (sc.hasNextLine()) {
             String result = sc.nextLine();
-            if (result.contains(" ") || result.contains("\t")) {
-                System.out.println("Error input: " + filename + " String contains a whitespace character:" + result);
+            if (result.contains(" ") || result.contains("\t") || result.length() == 0) {
+                System.out.println("Error input: " + filename + " String contains a whitespace character or empty:" + result);
                 return getNext();
             } else {
                 try {
                     return Integer.parseInt(result);
-                } catch (Exception e) {
-                    System.out.println("Error input: " + filename + " " + sc.nextLine() + " " +e.getMessage());
-                    //throw new EOFException("Error input: " + filename + " " + sc.nextLine());
+                } catch (NumberFormatException e) {
+                    System.out.println("Error input: " + filename + " Convert to int error:" + result);
                     return getNext();
                 }
             }

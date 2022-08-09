@@ -44,8 +44,8 @@ public class MyReader implements IReadable {
     private String getNext() throws EOFException {
         if (sc.hasNextLine()) {
             String result = sc.nextLine();
-            if (result.contains(" ") || result.contains("\t")) {
-                System.out.println("Error input: " + filename + " String contains a whitespace character:" + result);
+            if (result.contains(" ") || result.contains("\t") || result.length() == 0) {
+                System.out.println("Error input: " + filename + " String contains a whitespace character or empty:" + result);
                 return getNext();
             } else {
                 return result;
